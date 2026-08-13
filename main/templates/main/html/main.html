@@ -5,6 +5,7 @@
     <meta name='viewport' contetnt="width=device-width, initial-scale=1.0">
     <title>Remove Background</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    
 </head>
 <body>
     <nav>
@@ -21,20 +22,34 @@
         </div>
         <div class="pic-input">
             <form method="post" enctype="multipart/form-data">
+                <div class="form-data">
                 {% csrf_token %}
                 <label for="image" ><span id="select-image">Select Image</span></label>
                 <h5>or paste <span id="url-input">URL</span></h5>
-                <input type="image" id="image" accept="image/*" hidden>
+                <input type="file" id="image" accept="image/*" hidden>
+                </div>
+                <div class="preview">
+                    <div class="preview-btns" id="preview-btns">
+                    <button id="download-btn">⬇</button>
+                    <button id="cancel-btn">✕</button>
+                    </div>
+                    <img src="{% static 'images/fakhir.jpg' %}" id="preview-img">
+                </div>
             </form>
+           
             <div class="term-of-service"><p>By uploading an image or url you agree to our Terms Of Service.</p></div>
         </div>
     </section>
     <footer>
+        <div class="footer-icons">
+
+        </div>
         <p>Terms of Service</p>
         <p>General Terms and Conditions</p>
         <p>Privacy Policy</p>
         <p>Cookie Policy</p>
         <p>@ BgRemover.com,Fakhir Masood</p>
     </footer>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
