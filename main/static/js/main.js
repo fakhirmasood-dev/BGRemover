@@ -1,7 +1,8 @@
 preview_img=document.getElementById('preview-img');
 preview_btns=document.getElementById('preview-btns');
 url_input=document.getElementById('url-input');
-image=document.getElementById('image');
+imageInput=document.getElementById('image-input');
+preview=document.getElementById('preview');
 console.log(preview_btns);
 console.log(preview_img)
 
@@ -11,17 +12,22 @@ preview_img.addEventListener('mouseenter',()=>{
 })
 
 url_input.addEventListener('click',()=>{
-    try{url=prompt('Paste url of image');
+    url=prompt('Paste url of image');
     console.log(url);
-    }catch(error){
-        console.log(error.message);
-    }
     
 })
 
-image.addEventListener('change',()=>{
-    image=this.File[0];
-    preview_img.src=URL.createObjectURL(image);
-    preview_img.style.display='block';
+imageInput.addEventListener('change',()=>{
+    try{
+
+    const file=imageInput.files[0];
+    console.log(file);
+    preview_img.src=URL.createObjectURL(file);
+    console.log(preview_img.value);
+    preview.style.display='block';
+    console.log('done');
+    }catch(error){
+        console.log(error.message);
+    }
 })
 

@@ -24,11 +24,11 @@
             <form method="post" enctype="multipart/form-data">
                 <div class="form-data">
                 {% csrf_token %}
-                <label for="image" ><span id="select-image">Select Image</span></label>
+                <label for="image-input" ><span id="select-image">Select Image</span></label>
                 <h5>or paste <span id="url-input">URL</span></h5>
-                <input type="file" id="image" accept="image/*" hidden>
+                <input type="file" id="image-input" accept="image/*" hidden>
                 </div>
-                <div class="preview">
+                <div class="preview" id="preview">
                     <div class="preview-btns" id="preview-btns">
                     <button id="download-btn">⬇</button>
                     <button id="cancel-btn">✕</button>
