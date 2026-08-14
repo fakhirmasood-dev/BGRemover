@@ -22,10 +22,11 @@
         </div>
         <div class="pic-input">
             <form method="post" enctype="multipart/form-data">
-                <div class="form-data">
+                <div class="form-data" id="form-data">
                 {% csrf_token %}
                 <label for="image-input" ><span id="select-image">Select Image</span></label>
                 <h5>or paste <span id="url-input">URL</span></h5>
+                
                 <input type="file" id="image-input" accept="image/*" hidden>
                 </div>
                 <div class="preview" id="preview">
@@ -33,8 +34,11 @@
                     <button id="download-btn">⬇</button>
                     <div id="cancel-btn">✕</div>
                     </div>
-                    <img src="{% static 'images/fakhir.jpg' %}" id="preview-img">
+                    <img src="#" id="preview-img">
                 </div>
+                <div class="ring-wrapper" id="ring-wrapper">
+                    <div class="ring"></div>
+                    </div>
             </form>
            
             <div class="term-of-service"><p>By uploading an image or url you agree to our Terms Of Service.</p></div>
