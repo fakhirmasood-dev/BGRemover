@@ -200,7 +200,7 @@ footer p{
 }
 
 .both-images{
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
@@ -224,6 +224,7 @@ footer p{
     height:100%;
     border-radius:20px;
     border:solid 2px blue;
+    display: none;
 }
 
 .processed-img:hover{
@@ -237,19 +238,95 @@ footer p{
 }
 
 .processing-loader{
-    width:200px;
-    height:200px;
-    background: repeating-radial-gradient(
-        /* to right, */
-        rgb(33, 33, 84) 0 10px,
-        white 10px 20px
-    );
-    filter:drop-shadow(10px 10px 20px black);
+    width:100%;
+    height:100%;
+   background: linear-gradient(to right,black,blue);
+   border-radius: 20px;
+    border:solid 2px blue;
+
+} 
+
+
+  .star{
+        width:20px;
+        height:20px;
+        background: yellow;
+        clip-path: polygon(
+        50% 0%,
+        60% 30%,
+        100% 50%,
+        60% 70%,
+        50% 100%,
+        40% 70%,
+        0% 50%,
+        40% 30%,
+        50% 0%
+        );
+
+        transform: rotate(50deg);
+        animation:scale 2s linear infinite;
+
+    }
+
+.star:nth-child(1){
+    position: relative;
+    left:5%;
+
+}
+
+.star:nth-child(2){
+    position: relative;
+    left:50%;
+    top:10%;
+    animation-delay: 1.2s;
+}
+
+.star:nth-child(3){
+    position: relative;
+    left:70%;
+    top:30%;
+    animation-delay: 1.4s;
+}
+
+.star:nth-child(4){
+    position: relative;
+    left:30%;
+    top:50%;
+    animation-delay: 1.6s;
+}
+
+.star:nth-child(6){
+    position: relative;
+    top:20%;
+    animation-delay: 1.8s;
+    left:60%;
+}
+
+.loader-wrapper{
+    box-sizing: border-box;
+    width:50%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.img-div{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    width:100%;
+    height: 100%;
 }
 
 
 @keyframes rotate{
     to{
         transform: rotate(-360deg);
+    }
+}
+
+@keyframes scale{
+    to{
+        opacity: 0;
+        transform: scale(2);
     }
 }

@@ -34,7 +34,9 @@
                     <button id="download-btn">⬇</button>
                     <div id="cancel-btn">✕</div>
                     </div>
+                    <div class="img-div" id="img-div">
                     <img src="#" id="preview-img">
+                    </div>
                 </div>
                 <div class="ring-wrapper" id="ring-wrapper">
                     <div class="ring"></div>
@@ -43,9 +45,20 @@
               <div class="both-images" id="both-images">
             <div class="orignal-img" id="orignal-img"><img src="{% static 'images/fakhir.jpg' %}" id="orignal-image"></div>
             <div class="processed-img" id="processed-img"><img src="{% static 'images/fakhir.jpg' %}" id="processed-image"></div>
+           
+            <div class="loader-wrapper" id="loader-wrapper">  
+            <div class="processing-loader" id="processing-loader">
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                </div>
                 
+                </div>
         </div>
-        <div class="processing-loader"></div>
+        
           
            
         </div>
