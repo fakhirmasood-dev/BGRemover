@@ -8,17 +8,16 @@ cancel_btn=document.getElementById('cancel-btn');
 ring_wrapper=document.getElementById('ring-wrapper');
 form_data=document.getElementById('form-data');
 orignal_img=document.getElementById('orignal-image');
-processed_img=document.getElementById('processed-image');
+processed_img=document.getElementById('processed-img');
 both_images=document.getElementById('both-images');
-processing_loader=document.getElementById('processing-loader');
-img_div=document.getElementById('img-div');
-loader_wrapper=document.getElementById('loader-wrapper');
+stars=document.getElementById('stars');
+image_div=document.getElementById('img-div');
+orignal_img_div=document.getElementById('orignal-img');
 
-console.log(processing_loader);
 console.log('hi');
 
 
-preview_img.addEventListener('mouseenter',()=>{
+orignal_img.addEventListener('mouseenter',()=>{
     preview_btns.style.display='flex';
     console.log('done');
 })
@@ -75,26 +74,22 @@ cancel_btn.addEventListener('click',()=>{
 
 orignal_img.addEventListener('click',()=>{
     console.log('triggres');
-    img_div.innerHTML=`<img src="${orignal_img.src}" id="preview-img">`
-    img_div.style.width='100%';
-    img_div.style.height='100%';
-    img_div.style.Zindex='2';
+    image_div.innerHTML=orignal_img_div.innerHTML;
     preview.style.display='block';
     form_data.style.display='none';
 
 })
 processed_img.addEventListener('click',()=>{
-    preview_img.src=processed_img.src;
     preview.style.display='block'
     form_data.style.display='none';
 })
 
-processing_loader.addEventListener('click',()=>{
-    console.log('done');
-    img_div.innerHTML=loader_wrapper.innerHTML;
-    img_div.style.width='99%';
-    img_div.style.height='99%';
+stars.addEventListener('click',()=>{
+    image_div.innerHTML=processed_img.innerHTML;
+    console.log(processed_img.innerHTML);
+    console.log('html changed');
     preview.style.display='block'
     form_data.style.display='none';
 })
+
 
