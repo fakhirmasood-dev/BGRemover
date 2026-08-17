@@ -9,15 +9,14 @@ ring_wrapper=document.getElementById('ring-wrapper');
 form_data=document.getElementById('form-data');
 orignal_img=document.getElementById('orignal-image');
 processed_img=document.getElementById('processed-img');
+processed_image=document.getElementById('processed-image');
 both_images=document.getElementById('both-images');
 stars=document.getElementById('stars');
 image_div=document.getElementById('img-div');
 orignal_img_div=document.getElementById('orignal-img');
 
-console.log('hi');
 
-
-orignal_img.addEventListener('mouseenter',()=>{
+orignal_img.addEventListener('click',()=>{
     preview_btns.style.display='flex';
     console.log('done');
 })
@@ -53,7 +52,15 @@ imageInput.addEventListener('change',()=>{
     const file=imageInput.files[0];
     preview_img.src=URL.createObjectURL(file);
     orignal_img.src=URL.createObjectURL(file);
+    processed_image.src=URL.createObjectURL(file);
+    image_div.innerHTML=processed_img.innerHTML;
+    console.log(processed_img.innerHTML);
+    console.log('html changed');
+    preview_btns.style.display='none';
+    preview.style.display='block'
+    form_data.style.display='none';
     both_images.style.display='flex';
+    preview_btns.style.display='flex';
     console.log(preview_img.value);
     preview.style.display='block';
     ring_wrapper.style.display='none';
@@ -88,8 +95,10 @@ stars.addEventListener('click',()=>{
     image_div.innerHTML=processed_img.innerHTML;
     console.log(processed_img.innerHTML);
     console.log('html changed');
+    preview_btns.style.display='none';
     preview.style.display='block'
     form_data.style.display='none';
+
 })
 
 

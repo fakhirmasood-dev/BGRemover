@@ -200,7 +200,7 @@ footer p{
 }
 
 .both-images{
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
