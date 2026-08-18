@@ -101,4 +101,41 @@ stars.addEventListener('click',()=>{
 
 })
 
+function getCsrfToken(){
+    csrf_token=document.cookie.split('=')[1];
+    return csrf_token
+}
+
+getCsrfToken();
+imageInput.addEventListener('change',
+    async function upload(){
+    try{
+        const file=imageInput.files[0];
+        formdata=new FormData();
+        formdata.append('file',file);
+        const response=await fetch('/remove-bg/home/',
+        {
+            method:'POST',
+            headers:{
+                'X-CSRFToken':getCsrfToken()
+            },
+            body:formdata
+
+
+        }
+    )
+    if (!response.status){
+            throw new error('cant send data.')
+        }else{
+        console.log(response.status);
+    }
+    }catch(error){
+        console.log(error);
+    };
+    
+}
+)
+
+
+
 
