@@ -14,6 +14,7 @@ both_images=document.getElementById('both-images');
 stars=document.getElementById('stars');
 image_div=document.getElementById('img-div');
 orignal_img_div=document.getElementById('orignal-img');
+// console.log('hi hi hi hi hi hi hi')
 
 
 orignal_img.addEventListener('click',()=>{
@@ -123,18 +124,29 @@ imageInput.addEventListener('change',
 
 
         }
+        
     )
     if (!response.status){
             throw new error('cant send data.')
         }else{
         console.log(response.status);
+        getData();
     }
     }catch(error){
         console.log(error);
-    };
+    }
     
 }
 )
+
+async function getData(){
+    const response=await fetch('/remove-bg/remove/');
+    let data=await response.json();
+    console.log(data)
+    image_div.innerHTML=`<img src="${data.image_url}" id="preview-img">`
+    console.log('done');
+}
+
 
 
 
