@@ -14,6 +14,7 @@ both_images=document.getElementById('both-images');
 stars=document.getElementById('stars');
 image_div=document.getElementById('img-div');
 orignal_img_div=document.getElementById('orignal-img');
+image=document.getElementById('image');
 // console.log('hi hi hi hi hi hi hi')
 
 
@@ -144,6 +145,10 @@ async function getData(){
     let data=await response.json();
     console.log(data)
     image_div.innerHTML=`<img src="${data.image_url}" id="preview-img">`
+    processed_img.innerHTML=`<img src="${data.image_url}" id="processed-image"></div>`
+    image.style.filter='blur(0px)';
+    stars.style.display='none';
+
     console.log('done');
 }
 

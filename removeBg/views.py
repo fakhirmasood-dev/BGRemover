@@ -4,6 +4,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.files.base import ContentFile
 from django.conf import settings
 from django.http import JsonResponse
+from time import sleep
 
 def home(request):
     if request.method =='POST':
@@ -15,5 +16,6 @@ def home(request):
 
 def get_img(request):
     image_url=request.session.get('image_url')
+    sleep(5)
     return JsonResponse({'image_url':image_url})
    
