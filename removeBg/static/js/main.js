@@ -16,6 +16,7 @@ image_div=document.getElementById('img-div');
 orignal_img_div=document.getElementById('orignal-img');
 image=document.getElementById('image');
 // console.log('hi hi hi hi hi hi hi')
+console.log(sessionStorage.getItem('image_url'))
 
 
 orignal_img.addEventListener('click',()=>{
@@ -55,6 +56,16 @@ imageInput.addEventListener('change',()=>{
     preview_img.src=URL.createObjectURL(file);
     orignal_img.src=URL.createObjectURL(file);
     processed_image.src=URL.createObjectURL(file);
+    file_url=URL.createObjectURL(file)
+    // processed_img.innerHTML=`<div class="image" id="image">  <img src="${file_url}" id="processed-image"></div>
+    // <div class="stars" id="stars">
+    //               <div class="star"></div>
+    //                 <div class="star"></div>
+    //                 <div class="star"></div>
+    //                 <div class="star"></div>
+    //                 <div class="star"></div>
+    //                 <div class="star"></div>
+    //                 </div> `
     image_div.innerHTML=processed_img.innerHTML;
     console.log(processed_img.innerHTML);
     console.log('html changed');
@@ -98,7 +109,7 @@ stars.addEventListener('click',()=>{
     console.log(processed_img.innerHTML);
     console.log('html changed');
     preview_btns.style.display='none';
-    preview.style.display='block'
+    preview.style.display='block';
     form_data.style.display='none';
 
 })
@@ -139,13 +150,22 @@ imageInput.addEventListener('change',
     
 }
 )
+processed_image.addEventListener('click',
+    ()=>{
+        console.log('clicked');
+        image_div.innerHTML=`<img src="${processed_image.src}" id="processed-image">`
+
+        
+    }
+)
 
 async function getData(){
     const response=await fetch('/remove-bg/remove/');
     let data=await response.json();
     console.log(data)
     image_div.innerHTML=`<img src="${data.image_url}" id="preview-img">`
-    processed_img.innerHTML=`<img src="${data.image_url}" id="processed-image"></div>`
+    console.log(data.image_url)
+    processed_image.src=data.image_url;
     image.style.filter='blur(0px)';
     stars.style.display='none';
 
