@@ -134,11 +134,10 @@ footer p{
     gap:10px;
     justify-content: flex-end;
     border-radius: 20px;
+    display: none;
 
 }
-.preview-btns.show{
-    display: flex;
-}
+
 
 
 

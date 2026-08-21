@@ -53,6 +53,8 @@ imageInput.addEventListener('change',()=>{
     ring_wrapper.style.display='flex';
     form_data.style.display='none';
     const file=imageInput.files[0];
+    preview_btns.style.display='none';
+    download_btn.style.display='none';
     preview_img.src=URL.createObjectURL(file);
     orignal_img.src=URL.createObjectURL(file);
     processed_image.src=URL.createObjectURL(file);
@@ -69,13 +71,10 @@ imageInput.addEventListener('change',()=>{
     image_div.innerHTML=processed_img.innerHTML;
     console.log(processed_img.innerHTML);
     console.log('html changed');
-    preview_btns.style.display='none';
     preview.style.display='block'
     form_data.style.display='none';
     both_images.style.display='flex';
-    preview_btns.style.display='flex';
     console.log(preview_img.value);
-    preview.style.display='block';
     ring_wrapper.style.display='none';
 
     console.log('done');
@@ -97,11 +96,15 @@ orignal_img.addEventListener('click',()=>{
     image_div.innerHTML=orignal_img_div.innerHTML;
     preview.style.display='block';
     form_data.style.display='none';
+    download_btn.style.display='none';
+    preview_btns.style.display='flex';
 
 })
 processed_img.addEventListener('click',()=>{
     preview.style.display='block'
     form_data.style.display='none';
+    preview_btns.style.display='flex';
+    download_btn.style.display='flex';
 })
 
 stars.addEventListener('click',()=>{
@@ -109,6 +112,7 @@ stars.addEventListener('click',()=>{
     console.log(processed_img.innerHTML);
     console.log('html changed');
     preview_btns.style.display='none';
+    download_btn.style.display='none';
     preview.style.display='block';
     form_data.style.display='none';
 
@@ -168,6 +172,9 @@ async function getData(){
     processed_image.src=data.image_url;
     image.style.filter='blur(0px)';
     stars.style.display='none';
+    preview_btns.style.display='flex';
+    download_btn.href=data.image_url;
+    download_btn.style.display='flex';
 
     console.log('done');
 }
