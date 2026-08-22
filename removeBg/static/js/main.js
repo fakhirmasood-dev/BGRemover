@@ -59,19 +59,13 @@ imageInput.addEventListener('change',()=>{
     orignal_img.src=URL.createObjectURL(file);
     processed_image.src=URL.createObjectURL(file);
     file_url=URL.createObjectURL(file)
-    // processed_img.innerHTML=`<div class="image" id="image">  <img src="${file_url}" id="processed-image"></div>
-    // <div class="stars" id="stars">
-    //               <div class="star"></div>
-    //                 <div class="star"></div>
-    //                 <div class="star"></div>
-    //                 <div class="star"></div>
-    //                 <div class="star"></div>
-    //                 <div class="star"></div>
-    //                 </div> `
+    preview.style.display='block';
+    stars.style.display='block';
+    image.style.filter='blur(10px)';
     image_div.innerHTML=processed_img.innerHTML;
     console.log(processed_img.innerHTML);
+    console.log(image_div.innerHTML);
     console.log('html changed');
-    preview.style.display='block'
     form_data.style.display='none';
     both_images.style.display='flex';
     console.log(preview_img.value);
@@ -100,20 +94,13 @@ orignal_img.addEventListener('click',()=>{
     preview_btns.style.display='flex';
 
 })
-processed_img.addEventListener('click',()=>{
-    preview.style.display='block'
-    form_data.style.display='none';
-    preview_btns.style.display='flex';
-    download_btn.style.display='flex';
-})
 
 stars.addEventListener('click',()=>{
     image_div.innerHTML=processed_img.innerHTML;
     console.log(processed_img.innerHTML);
     console.log('html changed');
-    preview_btns.style.display='none';
-    download_btn.style.display='none';
     preview.style.display='block';
+    preview_btns.style.display='none';
     form_data.style.display='none';
 
 })
@@ -158,6 +145,10 @@ processed_image.addEventListener('click',
     ()=>{
         console.log('clicked');
         image_div.innerHTML=`<img src="${processed_image.src}" id="processed-image">`
+        download_btn.style.display='flex';    
+        preview.style.display='block'
+        form_data.style.display='none'; 
+        preview_btns.style.display='flex'; 
 
         
     }
@@ -167,15 +158,16 @@ async function getData(){
     const response=await fetch('/remove-bg/remove/');
     let data=await response.json();
     console.log(data)
-    image_div.innerHTML=`<img src="${data.image_url}" id="preview-img">`
     console.log(data.image_url)
-    processed_image.src=data.image_url;
-    image.style.filter='blur(0px)';
     stars.style.display='none';
     preview_btns.style.display='flex';
+    preview_btns.style.display='flex';
+    preview.style.display='block';
     download_btn.href=data.image_url;
     download_btn.style.display='flex';
-
+    processed_image.src=data.image_url;
+    image_div.innerHTML=`<img src='${data.image_url}' id=preview-img>`;
+    image.style.filter='blur(0px)';
     console.log('done');
 }
 

@@ -140,7 +140,6 @@ footer p{
 
 
 
-
 #download-btn{
     background: rgba(255,255,255,0.6);
     width:10%;
@@ -151,8 +150,13 @@ footer p{
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-
 }
+.preview a{
+    color:black;
+    text-decoration: none;
+}
+
+
 
 #cancel-btn{
     background: rgba(255,255,255,0.6);
