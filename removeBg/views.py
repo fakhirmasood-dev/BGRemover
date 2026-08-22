@@ -17,11 +17,12 @@ def home(request):
         image=Image.open(file)
         image=remove(image)
         bytes_io=BytesIO()
+        filename=f"remove-bg_{uuid.uuid4().hex}.png"
         image.save(bytes_io,format='PNG')
-        content_object=ContentFile(bytes_io.getvalue(),'remvoe_background.png')
+        content_object=ContentFile(bytes_io.getvalue(),filename)
         fs=FileSystemStorage()
-        fs.save('remove_background.png',content_object)
-        request.session['image_url']=fs.url('remove_background.png')
+        fs.save(filename,content_object)
+        request.session['image_url']=fs.url(filename)
     print(request.session.get('image_url'))
     return render(request,'removeBg/html/main.html')
 
