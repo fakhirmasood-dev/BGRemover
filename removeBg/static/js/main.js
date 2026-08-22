@@ -26,17 +26,25 @@ orignal_img.addEventListener('click',()=>{
 
 url_input.addEventListener('click',()=>{
     url=prompt('Paste url of image');
+    if (url === ''){
+        alert('Please Enter a URL.');
+    }
     const testImage=new Image(url);
     ring_wrapper.style.display='flex';
     form_data.style.display='none';
     testImage.onload=()=>{
         console.log('image loaded');
-        preview_img.src=url;
         orignal_img.src=url;
+        processed_image.src=url;
+        image.style.filter='blur(10px)';
+        stars.style.display='block';
+        preview_btns.style.display='none';
+        image_div.innerHTML=processed_img.innerHTML;
         both_images.style.display='flex';
         preview.style.display='block';
         ring_wrapper.style.display='none';
         form_data.style.display='flex';
+        send_url_to_backend(url);
     }
     testImage.onerror=()=>{
         ring_wrapper.style.display='none';
@@ -47,6 +55,7 @@ url_input.addEventListener('click',()=>{
     
     
 })
+
 
 imageInput.addEventListener('change',()=>{
     try{
@@ -110,7 +119,29 @@ function getCsrfToken(){
     return csrf_token
 }
 
-getCsrfToken();
+
+async function send_url_to_backend(url){
+    try{
+        const response=await fetch('/remove-bg/url/',{
+            'method':'POST',
+            'headers':{
+                'content-type':'application/json',
+                'X-CSRFToken':getCsrfToken()
+            },
+            body:JSON.stringify({
+                'url':url
+            })
+        })
+        if (!response.status){
+            console.log('some error occured.');
+        }else{
+            getUrlPImage();
+        }
+    }catch(error){
+        console.log(error);
+    }
+}
+
 imageInput.addEventListener('change',
     async function upload(){
     try{
@@ -133,7 +164,7 @@ imageInput.addEventListener('change',
             throw new error('cant send data.')
         }else{
         console.log(response.status);
-        getData();
+        getUrlPImage();
     }
     }catch(error){
         console.log(error);
@@ -153,8 +184,25 @@ processed_image.addEventListener('click',
         
     }
 )
+async function getUrlPImage() {
+    const response=await fetch('/remove-bg/get_url_processed_image/');
+    let data=await response.json();
+    console.log(data)
+    console.log(data.image_url)
+    stars.style.display='none';
+    preview_btns.style.display='flex';
+    preview_btns.style.display='flex';
+    preview.style.display='block';
+    download_btn.href=data.image_url;
+    download_btn.style.display='flex';
+    processed_image.src=data.image_url;
+    image_div.innerHTML=`<img src='${data.image_url}' id=preview-img>`;
+    image.style.filter='blur(0px)';
+    console.log('done');
+    
+}
 
-async function getData(){
+async function getPImage(){
     const response=await fetch('/remove-bg/remove/');
     let data=await response.json();
     console.log(data)

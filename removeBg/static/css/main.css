@@ -49,6 +49,7 @@ footer{
 
 .pic-input{
     display: flex;
+    width:100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -213,17 +214,22 @@ footer p{
 }
 
 .orignal-img{
+    position: relative;
+    box-sizing: border-box;
     width:50%;
     height:100%;
     border-radius: 20px;
     border:solid 2px blue;
+    display: block;
 }
+
 .orignal-img:hover{
     filter:drop-shadow(2px 2px 5px black);
 }
 
 .processed-img{
     position: relative;
+    box-sizing: border-box;
     width:50%;
     height:100%;
     border-radius:20px;
@@ -242,7 +248,7 @@ footer p{
 .both-images img{
     width:100%;
     height:100%;
-    border-radius: 20px;
+    border-radius: 18px;
 }
 
 
