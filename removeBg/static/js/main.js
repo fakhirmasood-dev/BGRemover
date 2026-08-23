@@ -85,6 +85,7 @@ imageInput.addEventListener('change',()=>{
         ring_wrapper.style.display='none';
         form_data.style.display='flex'
         console.log(error.message);
+        alert('Some error occured try again.')
     }
 })
 

@@ -14,10 +14,23 @@ nav{
     border-radius: 20px;
     font-size: 20px;
     display: flex;
+    justify-content: space-between;
+    padding-left: 2%;
+    padding-right: 2%;
     
+}
+.nav-links{
+    display: flex;
+    gap:20px;
+}
+
+.nav-links h5:hover{
+    color:blue;
+    transform: scale(1.02);
 }
 .demo-wrapper{
     display: flex;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -25,22 +38,43 @@ nav{
 .demo-wrapper span{
     background-color: blueviolet;
     border-radius: 20px;
+    outline: none;
+    border: none;
+    padding:0;
+    margin:0;
     display: inline-block;
     text-align: center;
-    width:94px;
+    width:110px;
+    height: 40px;
+    font-weight: bold;
+    text-transform: capitalize;
 }
 
 .demo{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap:100px;
+    /* gap:100px; */
     width:80%;
 }
 .demo img{
-    width:100%;
+    width:50%;
     height:400px;
     border-radius: 20px;
+}
+
+.arrow{
+    width:100%;
+    height: 100%;
+    font-size:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.arrow img{
+    width:80%;
+    height:20%;
+
 }
 
 
@@ -81,6 +115,8 @@ footer{
 
 .hero h1{
     width:fit-content;
+    font-weight: bold ;
+    text-transform:capitalize;
 }
 
 .animated-img{
@@ -119,6 +155,14 @@ footer{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+#form-heading{
+    background-color: blueviolet;
+    border-radius: 20px;
+    display: inline-block;
+    text-align: center;
+    width:200px;
+
 }
 
 

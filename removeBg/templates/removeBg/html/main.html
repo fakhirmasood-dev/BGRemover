@@ -10,6 +10,10 @@
 <body>
     <nav>
         <h5>Background Remover</h5>
+        <div class="nav-links">
+            <h5>Remove BG</h5>
+            <h5>Demo</h5>
+        </div>
 </nav>
     <section>
        
@@ -17,7 +21,7 @@
             <h1>
                 Welcome!<br>
                 Remove Background without<br>
-                Register and Signup.<br>
+                Registration or Signup.<br>
                <span> Free</span> and Secure.<br>
             </h1>
             <div class="animated-img">
@@ -26,14 +30,15 @@
             </div>
         </div>
          <div class="demo-wrapper">
-            <h1>Look at the demo how our website<br><span>works.</span></h1>
+            <h1>See How Our Website<br><span>Works</span>.</h1>
         <div class="demo">
             <img src="{% static 'images/demo.jpg' %}"> 
-            <div class="arrow">arrow</div>
+            <div class="arrow"><img src="{% static 'images/arrow.png' %}"></div>
             <img src="{% static 'images/demo_remove.png' %}"> 
         </div>
         </div>
         <div class="pic-input">
+            <h1>Let's Remove <span id="form-heading">Background</span>.</h1>
             <form method="post" enctype="multipart/form-data">
                 <div class="form-data" id="form-data">
                 {% csrf_token %}
