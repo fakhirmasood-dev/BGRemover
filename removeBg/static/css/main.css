@@ -155,6 +155,7 @@ footer{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap:5px; 
 }
 #form-heading{
     background-color: blueviolet;
@@ -217,6 +218,16 @@ footer p{
     justify-content: center;
     align-items: center;
    
+}
+
+#image-error{
+    height:20px;
+    width:fit-content;
+    display: none;
+    border-radius: 20px;
+    background-color: #ffe5e5;
+    color:red;
+    text-align: center;
 }
 .preview{
     box-sizing: border-box;

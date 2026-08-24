@@ -15,8 +15,7 @@ stars=document.getElementById('stars');
 image_div=document.getElementById('img-div');
 orignal_img_div=document.getElementById('orignal-img');
 image=document.getElementById('image');
-// console.log('hi hi hi hi hi hi hi')
-console.log(sessionStorage.getItem('image_url'))
+image_error=document.getElementById('image-error');
 
 
 orignal_img.addEventListener('click',()=>{
@@ -31,9 +30,9 @@ url_input.addEventListener('click',()=>{
     }
     const testImage=new Image(url);
     ring_wrapper.style.display='flex';
+    image_error.style.display='none';
     form_data.style.display='none';
     testImage.onload=()=>{
-        console.log('image loaded');
         orignal_img.src=url;
         processed_image.src=url;
         image.style.filter='blur(10px)';
@@ -50,6 +49,7 @@ url_input.addEventListener('click',()=>{
         ring_wrapper.style.display='none';
         form_data.style.display='flex';
         console.log('Loading Failed1');
+        alert('The provided image URL is not accessable.')
     }
     testImage.src=url;
     
@@ -60,6 +60,7 @@ url_input.addEventListener('click',()=>{
 imageInput.addEventListener('change',()=>{
     try{
     ring_wrapper.style.display='flex';
+    image_error.style.display='none';
     form_data.style.display='none';
     const file=imageInput.files[0];
     preview_btns.style.display='none';
@@ -72,15 +73,12 @@ imageInput.addEventListener('change',()=>{
     stars.style.display='block';
     image.style.filter='blur(10px)';
     image_div.innerHTML=processed_img.innerHTML;
-    console.log(processed_img.innerHTML);
-    console.log(image_div.innerHTML);
     console.log('html changed');
     form_data.style.display='none';
     both_images.style.display='flex';
     console.log(preview_img.value);
     ring_wrapper.style.display='none';
 
-    console.log('done');
     }catch(error){
         ring_wrapper.style.display='none';
         form_data.style.display='flex'
@@ -96,7 +94,6 @@ cancel_btn.addEventListener('click',()=>{
 })
 
 orignal_img.addEventListener('click',()=>{
-    console.log('triggres');
     image_div.innerHTML=orignal_img_div.innerHTML;
     preview.style.display='block';
     form_data.style.display='none';
@@ -107,8 +104,6 @@ orignal_img.addEventListener('click',()=>{
 
 stars.addEventListener('click',()=>{
     image_div.innerHTML=processed_img.innerHTML;
-    console.log(processed_img.innerHTML);
-    console.log('html changed');
     preview.style.display='block';
     preview_btns.style.display='none';
     form_data.style.display='none';
@@ -123,7 +118,7 @@ function getCsrfToken(){
 
 async function send_url_to_backend(url){
     try{
-        const response=await fetch('/remove-bg/url/',{
+        const response=await fetch('/remove-bg/url-send/',{
             'method':'POST',
             'headers':{
                 'content-type':'application/json',
@@ -133,9 +128,69 @@ async function send_url_to_backend(url){
                 'url':url
             })
         })
-        if (!response.status){
+        const data=response.json();
+        if(response.status === 401){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+        if(response.status === 403){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+        if(response.status === 402){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+        if(response.status === 413){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+        if(response.status === 400){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+        if(response.status === 500){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+        if (response.status === 200){
             console.log('some error occured.');
-        }else{
             getUrlPImage();
         }
     }catch(error){
@@ -161,12 +216,53 @@ imageInput.addEventListener('change',
         }
         
     )
-    if (!response.status){
-            throw new error('cant send data.')
-        }else{
-        console.log(response.status);
-        getUrlPImage();
-    }
+        const data=await response.json()
+        if(response.status === 400){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+        if(response.status === 415){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+        if(response.status === 413){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+
+        if(response.status === 500){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+        if (response.status === 200){
+            console.log(response.status);
+            getPImage();
+            }
+        
     }catch(error){
         console.log(error);
     }
@@ -187,9 +283,17 @@ processed_image.addEventListener('click',
 )
 async function getUrlPImage() {
     const response=await fetch('/remove-bg/get_url_processed_image/');
-    let data=await response.json();
-    console.log(data)
-    console.log(data.image_url)
+    const data=await response.json();
+     if(response.status === 500){
+        image_error.textContent=data.message;
+        image_error.style.display='inline-block';
+        preview_btns.style.display='none';
+        both_images.style.display='none';
+        preview_img.src='';
+        preview.style.display='none';
+        form_data.style.display='flex';
+        
+    }
     stars.style.display='none';
     preview_btns.style.display='flex';
     preview_btns.style.display='flex';
@@ -205,7 +309,17 @@ async function getUrlPImage() {
 
 async function getPImage(){
     const response=await fetch('/remove-bg/remove/');
-    let data=await response.json();
+    const data=await response.json();
+     if(response.status === 500){
+        image_error.textContent=data.message;
+        image_error.style.display='inline-block';
+        preview_btns.style.display='none';
+        both_images.style.display='none';
+        preview_img.src='';
+        preview.style.display='none';
+        form_data.style.display='flex';
+        
+    }
     console.log(data)
     console.log(data.image_url)
     stars.style.display='none';
