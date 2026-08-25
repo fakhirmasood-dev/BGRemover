@@ -1,3 +1,7 @@
+
+html{
+    scroll-behavior: smooth;
+}
 body{
     display: flex;
     flex-direction: column;
@@ -21,10 +25,22 @@ nav{
 }
 .nav-links{
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap:20px;
 }
+.nav-links a{
+    color:black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size:20px;
+}
+.nav-links h5{
+    font-weight: bold;
+}
 
-.nav-links h5:hover{
+
+.nav-links a:hover{
     color:blue;
     transform: scale(1.02);
 }
@@ -70,6 +86,7 @@ nav{
     display: flex;
     justify-content: center;
     align-items: center;
+    animation:fade 2s infinite alternate;
 }
 .arrow img{
     width:80%;
@@ -97,6 +114,10 @@ footer{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+footer img{
+    width:40px;
+    height:40px;
 }
 
 .hero{
@@ -163,6 +184,7 @@ footer{
     display: inline-block;
     text-align: center;
     width:200px;
+    animation: fade-1 2s infinite alternate;
 
 }
 
@@ -483,6 +505,17 @@ footer p{
 @keyframes move-left{
     to{
         transform:translateX(-50%);
+    }
+}
+
+@keyframes fade{
+    to{
+        transform:scale(1.2);
+    }
+}
+@keyframes fade-1{
+    to{
+        transform:scale(1.04);
     }
 }
 
