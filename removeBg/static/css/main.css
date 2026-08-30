@@ -356,7 +356,7 @@ footer p{
     height:200px;
 }
 
-.orignal-img{
+.orignal-image-container{
     position: relative;
     box-sizing: border-box;
     width:50%;
@@ -366,11 +366,11 @@ footer p{
     display: block;
 }
 
-.orignal-img:hover{
+.orignal-image-container:hover{
     filter:drop-shadow(2px 2px 5px black);
 }
 
-.processed-img{
+.processed-image-container{
     position: relative;
     box-sizing: border-box;
     width:50%;
@@ -380,11 +380,12 @@ footer p{
     display: block;
 }
 
-.image{
+.processed-image-wrapper{
     filter:blur(10px);
+    position: relative;
 }
 
-.processed-img:hover{
+.processed-image-container:hover{
     filter:drop-shadow(2px 2px 5px black);
 }
 
@@ -415,10 +416,6 @@ footer p{
         animation:scale 2s linear infinite;
 
     }
-.image{
-    position: relative;
-    
-}
 .stars{
     position: absolute;
     inset: 0;

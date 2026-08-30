@@ -8,13 +8,13 @@ cancel_btn=document.getElementById('cancel-btn');
 ring_wrapper=document.getElementById('ring-wrapper');
 form_data=document.getElementById('form-data');
 orignal_img=document.getElementById('orignal-image');
-processed_img=document.getElementById('processed-img');
+processed_image_container=document.getElementById('processed-image-container');
 processed_image=document.getElementById('processed-image');
 both_images=document.getElementById('both-images');
 stars=document.getElementById('stars');
 image_div=document.getElementById('img-div');
-orignal_img_div=document.getElementById('orignal-img');
-image=document.getElementById('image');
+orignal_image_container=document.getElementById('orignal-image-container');
+processed_image_wrapper=document.getElementById('processed-image-wrapper');
 image_error=document.getElementById('image-error');
 
 
@@ -35,10 +35,10 @@ url_input.addEventListener('click',()=>{
     testImage.onload=()=>{
         orignal_img.src=url;
         processed_image.src=url;
-        image.style.filter='blur(10px)';
+        processed_image_wrapper.style.filter='blur(10px)';
         stars.style.display='block';
         preview_btns.style.display='none';
-        image_div.innerHTML=processed_img.innerHTML;
+        image_div.innerHTML=processed_image_container.innerHTML;
         both_images.style.display='flex';
         preview.style.display='block';
         ring_wrapper.style.display='none';
@@ -71,8 +71,8 @@ imageInput.addEventListener('change',()=>{
     file_url=URL.createObjectURL(file)
     preview.style.display='block';
     stars.style.display='block';
-    image.style.filter='blur(10px)';
-    image_div.innerHTML=processed_img.innerHTML;
+    processed_image_wrapper.style.filter='blur(10px)';
+    image_div.innerHTML=processed_image_container.innerHTML;
     console.log('html changed');
     form_data.style.display='none';
     both_images.style.display='flex';
@@ -94,7 +94,7 @@ cancel_btn.addEventListener('click',()=>{
 })
 
 orignal_img.addEventListener('click',()=>{
-    image_div.innerHTML=orignal_img_div.innerHTML;
+    image_div.innerHTML=orignal_image_container.innerHTML;
     preview.style.display='block';
     form_data.style.display='none';
     download_btn.style.display='none';
@@ -103,7 +103,7 @@ orignal_img.addEventListener('click',()=>{
 })
 
 stars.addEventListener('click',()=>{
-    image_div.innerHTML=processed_img.innerHTML;
+    image_div.innerHTML=processed_image_container.innerHTML;
     preview.style.display='block';
     preview_btns.style.display='none';
     form_data.style.display='none';
@@ -302,7 +302,7 @@ async function getUrlPImage() {
     download_btn.style.display='flex';
     processed_image.src=data.image_url;
     image_div.innerHTML=`<img src='${data.image_url}' id=preview-img>`;
-    image.style.filter='blur(0px)';
+    processed_image_wrapper.style.filter='blur(0px)';
     console.log('done');
     
 }
@@ -330,7 +330,7 @@ async function getPImage(){
     download_btn.style.display='flex';
     processed_image.src=data.image_url;
     image_div.innerHTML=`<img src='${data.image_url}' id=preview-img>`;
-    image.style.filter='blur(0px)';
+    processed_image_wrapper.style.filter='blur(0px)';
     console.log('done');
 }
 

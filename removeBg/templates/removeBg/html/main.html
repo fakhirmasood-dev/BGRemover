@@ -62,9 +62,9 @@
             </form>
             <span id="image-error">It is for error which occure during processing.</span>
               <div class="both-images" id="both-images">
-            <div class="orignal-img" id="orignal-img"><img src="#" id="orignal-image"></div>
-            <div class="processed-img" id="processed-img">
-              <div class="image" id="image">  <img src="#" id="processed-image"></div>
+            <div class="orignal-image-container" id="orignal-image-container"><img src="#" id="orignal-image"></div>
+            <div class="processed-image-container" id="processed-image-container">
+              <div class="processed-image-wrapper" id="processed-image-wrapper">  <img src="#" id="processed-image"></div>
                  <div class="stars" id="stars">
                   <div class="star"></div>
                     <div class="star"></div>
@@ -88,9 +88,9 @@
     </section>
     <footer>
         <div class="footer-icons" >
-            <img src="{% static 'images/facebook.png' %}" id="facebook">
-            <img src="{% static 'images/linkedin.png' %}" id="linkedin">
-            <img src="{% static 'images/github.png' %}" id="github">
+           <a href="#"> <img src="{% static 'images/facebook.png' %}" id="facebook"></a>
+           <a href="#"> <img src="{% static 'images/linkedin.png' %}" id="linkedin"></a>
+           <a href="#"> <img src="{% static 'images/github.png' %}" id="github"></a>
 
         </div>
         <p>Terms of Service</p>
