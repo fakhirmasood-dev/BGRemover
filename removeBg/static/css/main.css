@@ -10,6 +10,7 @@ body{
     min-height: 100dvh;
     font-family: Arial, Helvetica, sans-serif;
     gap:100px;
+    background-color:white;
 }
 
 nav{
@@ -71,16 +72,16 @@ nav{
     justify-content: center;
     align-items: center;
     /* gap:100px; */
-    width:80%;
+    width:90%;
 }
 .demo img{
-    width:50%;
-    height:400px;
+    width:40%;
+    height:300px;
     border-radius: 20px;
 }
 
 .arrow{
-    width:100%;
+    width:80%;
     height: 100%;
     font-size:20px;
     display: flex;
@@ -89,7 +90,7 @@ nav{
     animation:fade 2s infinite alternate;
 }
 .arrow img{
-    width:80%;
+    width:60%;
     height:20%;
 
 }
@@ -189,13 +190,14 @@ footer img{
 }
 
 
+
 .pic-input form{
     
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    width:40%;
+    width:35%;
     height: 300px;
     border: solid 2px white;
     background: white;

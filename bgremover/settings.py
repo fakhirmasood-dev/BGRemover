@@ -164,3 +164,7 @@ LOGGING={
          }
      }
 }
+
+CELERY_TIMEZONE='Asia/Karachi'
+REDIS_TIMEZONE='Asia/Karachi'
+CELERY_BROKER_URL='redis://localhost:6379/0'
