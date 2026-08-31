@@ -307,19 +307,27 @@ async function getUrlPImage() {
     
 }
 
-async function getPImage(){
+function getPImage(){
+const interval= setInterval(async() => {
+    try{
     const response=await fetch('/remove-bg/remove/');
     const data=await response.json();
-     if(response.status === 500){
-        image_error.textContent=data.message;
-        image_error.style.display='inline-block';
-        preview_btns.style.display='none';
-        both_images.style.display='none';
-        preview_img.src='';
-        preview.style.display='none';
-        form_data.style.display='flex';
-        
-    }
+if(response.status === 500){
+    image_error.textContent=data.message;
+    image_error.style.display='inline-block';
+    preview_btns.style.display='none';
+    both_images.style.display='none';
+    preview_img.src='';
+    preview.style.display='none';
+    form_data.style.display='flex';
+    console.log('failed');
+    clearInterval(interval);
+    
+}
+if(response.status === 400){
+    console.log('not found');
+}
+if(response.status === 200){ 
     console.log(data)
     console.log(data.image_url)
     stars.style.display='none';
@@ -332,7 +340,20 @@ async function getPImage(){
     image_div.innerHTML=`<img src='${data.image_url}' id=preview-img>`;
     processed_image_wrapper.style.filter='blur(0px)';
     console.log('done');
+    console.log('failed2');
+    clearInterval(interval)
 }
+
+
+}catch(error){
+    console.log(error);
+}
+        
+    },1000);
+
+}
+
+
 
 
 

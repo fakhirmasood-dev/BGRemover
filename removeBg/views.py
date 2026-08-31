@@ -11,8 +11,10 @@ from PIL import Image
 from rembg import remove
 import requests
 import uuid
+from .tasks import remove_background
+from celery.result import AsyncResult
 
-def home(request):
+def home(request):              
     if request.method =='POST':
         try:
             MAX_SIZE=5*1024*1024  #5MB
@@ -46,18 +48,13 @@ def home(request):
                 return JsonResponse({
                     'message':'Image size should not exceed 5MB.'
                 },status=413)
-            image=Image.open(file)
-            print('image seeked')
-            image=remove(image)
-            print('background removed')
-            bytes_io=BytesIO()
-            filename=f"remove-bg_{uuid.uuid4().hex}.png"
-            image.save(bytes_io,format='PNG')
-            content_object=ContentFile(bytes_io.getvalue(),filename)
+            filename=f"upload_{uuid.uuid4().hex}.png"
             fs=FileSystemStorage()
-            fs.save(filename,content_object)
-            request.session['image_url']=fs.url(filename)
-            print(request.session.get('image_url'))
+            file_name=fs.save(filename,file)
+            print(file_name)
+            task=remove_background.delay(f'media/{file_name}')
+            request.session['task_id']=task.id
+            request.session['task_status']='processing'
         except Exception as e:
             print(e)
             print(image.size)
@@ -70,13 +67,22 @@ def home(request):
     return render(request,'removeBg/html/main.html')
 
 def get_img(request):
-    try:
-         image_url=request.session.get('image_url')
-    except Exception as e:
-        return JsonResponse({
-            'message':'Something went wrong while processing the image.'
+    print('started')
+    task_id=request.session.get('task_id')
+    if not task_id:
+        print('in task id')
+        return JsonResponse({'message':''},
+                            status=400)
+    task=AsyncResult(task_id)
+    print(task.status)
+    if task.successful():
+        print('in successful')
+        return JsonResponse({'image_url':task.result},status=200)
+    if task.failed():
+        print('in failed')
+        return JsonResponse({'message':'Something went wrong while processing the image.'
         },status=500)
-    return JsonResponse({'image_url':image_url})
+    return JsonResponse({'message':''},status=400)
 
 def get_url(request):
     if request.method == 'POST':
