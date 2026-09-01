@@ -98,7 +98,7 @@ orignal_img.addEventListener('click',()=>{
     preview.style.display='block';
     form_data.style.display='none';
     download_btn.style.display='none';
-    preview_btns.style.display='flex';
+    preview_btns.style.display='none';
 
 })
 
@@ -129,6 +129,7 @@ async function send_url_to_backend(url){
             })
         })
         const data=response.json();
+        console.log(data.message);
         if(response.status === 401){
             image_error.textContent=data.message;
             image_error.style.display='inline-block';
@@ -281,8 +282,10 @@ processed_image.addEventListener('click',
         
     }
 )
-async function getUrlPImage() {
-    const response=await fetch('/remove-bg/get_url_processed_image/');
+function getUrlPImage() {
+    try{
+    const interval=setInterval(async () => {
+        const response=await fetch('/remove-bg/get_url_processed_image/');
     const data=await response.json();
      if(response.status === 500){
         image_error.textContent=data.message;
@@ -291,9 +294,13 @@ async function getUrlPImage() {
         both_images.style.display='none';
         preview_img.src='';
         preview.style.display='none';
-        form_data.style.display='flex';
+        form_data.style.display='flex'; 
         
     }
+    if(response.status === 400){
+        console.log('not processed.')
+    }
+    if(response.status === 200){
     stars.style.display='none';
     preview_btns.style.display='flex';
     preview_btns.style.display='flex';
@@ -304,6 +311,13 @@ async function getUrlPImage() {
     image_div.innerHTML=`<img src='${data.image_url}' id=preview-img>`;
     processed_image_wrapper.style.filter='blur(0px)';
     console.log('done');
+    }
+        
+    }, 1000);
+    
+    }catch(error){
+        console.log(error);
+    }
     
 }
 

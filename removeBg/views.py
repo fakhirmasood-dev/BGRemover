@@ -96,6 +96,7 @@ def get_url(request):
             MAX_WIDTH=4096
             MAX_HEIGHT=4096
             size=0
+            bytes_io_1=BytesIO()
             downloaded_image=requests.get(url,stream=True)
             if downloaded_image.status_code == 401:
                 return JsonResponse({
@@ -113,12 +114,15 @@ def get_url(request):
                 },status=402)
             for chunk in downloaded_image.iter_content(chunk_size=8192):
                 size+=len(chunk)
+                bytes_io_1.write(chunk)
                 if size >MAX_SIZE:
                     return JsonResponse({
                         'message':'Image size should not exceed 5MB.'
                     },status=413)
-
-            bytes_io_1=BytesIO(downloaded_image.content)
+            print('here byte 1')
+            print(type(downloaded_image))
+            print('here byte 2')
+            bytes_io_1.seek(0)
             try:
                 downloaded_image.raise_for_status()
             except Exception as e:
@@ -128,6 +132,7 @@ def get_url(request):
                 },status=400)
             try:
                 image=Image.open(bytes_io_1)
+                extension=image.format.lower()
                 if image.width > MAX_WIDTH or image.height > MAX_HEIGHT:
                     return JsonResponse({
                         'message':'Image dimensions must not exceed 4096*4096 pixels.'
@@ -139,28 +144,37 @@ def get_url(request):
                     'message':'The uploaded file is not a valid image.'
                 },status=400)
             file_name=f"remove-bg_{uuid.uuid4().hex}.png"
-            image=remove(image)
-            bytes_io_2=BytesIO()
-            image.save(bytes_io_2,format='PNG')
-            content_object=ContentFile(bytes_io_2.getvalue(),file_name)
+            filename=f"upload_{uuid.uuid4().hex}.{extension}"
             fs=FileSystemStorage()
-            fs.save(file_name,content_object)
-            print(fs.url(file_name))
-            request.session['image_url']=fs.url(file_name)
+            print('here fs celery')
+            bytes_io_1.seek(0)
+            file_name=fs.save(filename,bytes_io_1)
+            print(file_name)
+            task=remove_background.delay(f'media/{file_name}')
+            request.session['task_id']=task.id
+            request.session['task_status']='processing'
         except Exception as e:
-            print(e)
+            print(f'in exception{e}')
             return JsonResponse({
                 'message':'Something went wrong while processing the image.'
             },status=500)
     return render(request,'removeBg/html/main.html')
 
 def send_url_processd_img(request):
-    try:
-        image_url=request.session.get('image_url')
-    except Exception as e:
-        print(e)
-        return JsonResponse({
-            'message':'Something went wrong while processing the image.'
+    print('started')
+    task_id=request.session.get('task_id')
+    if not task_id:
+        print('in task id')
+        return JsonResponse({'message':''},
+                            status=400)
+    task=AsyncResult(task_id)
+    print(task.status)
+    if task.successful():
+        print('in successful')
+        return JsonResponse({'image_url':task.result},status=200)
+    if task.failed():
+        print('in failed')
+        return JsonResponse({'message':'Something went wrong while processing the image.'
         },status=500)
-    return JsonResponse({'image_url':image_url})
+    return JsonResponse({'message':''},status=400)
    
