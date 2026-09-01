@@ -112,6 +112,7 @@ def get_url(request):
                 return JsonResponse({
                     'message':'The provided image URL requires a paid plan t access.'
                 },status=402)
+        
             for chunk in downloaded_image.iter_content(chunk_size=8192):
                 size+=len(chunk)
                 bytes_io_1.write(chunk)

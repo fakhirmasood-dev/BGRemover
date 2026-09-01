@@ -128,8 +128,9 @@ async function send_url_to_backend(url){
                 'url':url
             })
         })
-        const data=response.json();
+        const data=await response.json();
         console.log(data.message);
+
         if(response.status === 401){
             image_error.textContent=data.message;
             image_error.style.display='inline-block';
