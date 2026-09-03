@@ -22,7 +22,9 @@ orignal_img.addEventListener('click',()=>{
     preview_btns.style.display='flex';
     console.log('done');
 })
-
+// <===================================================================url input event listener=====================================================>
+// <===================================================================url input event listener=====================================================>
+// <===================================================================url input event listener=====================================================>
 url_input.addEventListener('click',()=>{
     url=prompt('Paste url of image');
     if (url === ''){
@@ -56,7 +58,9 @@ url_input.addEventListener('click',()=>{
     
 })
 
-
+// <============================================================================image input event listener=============================================================================
+// <============================================================================image input event listener=============================================================================
+// <============================================================================image input event listener=============================================================================
 imageInput.addEventListener('change',()=>{
     try{
     ring_wrapper.style.display='flex';
@@ -86,13 +90,13 @@ imageInput.addEventListener('change',()=>{
         alert('Some error occured try again.')
     }
 })
-
+// <============================================================cancel button event listener==========================================================>
 cancel_btn.addEventListener('click',()=>{
     preview_img.src='';
     preview.style.display='none';
     form_data.style.display='flex';
 })
-
+// <===================================================================original image event listener=================================================================>
 orignal_img.addEventListener('click',()=>{
     image_div.innerHTML=orignal_image_container.innerHTML;
     preview.style.display='block';
@@ -101,7 +105,7 @@ orignal_img.addEventListener('click',()=>{
     preview_btns.style.display='none';
 
 })
-
+// <=============================================================stars event listener==========================================================>
 stars.addEventListener('click',()=>{
     image_div.innerHTML=processed_image_container.innerHTML;
     preview.style.display='block';
@@ -109,13 +113,13 @@ stars.addEventListener('click',()=>{
     form_data.style.display='none';
 
 })
-
+// <===================================================================csrf token=====================================================================>
 function getCsrfToken(){
     csrf_token=document.cookie.split('=')[1];
     return csrf_token
 }
 
-
+// <======================================================send url to backend=============================================================>
 async function send_url_to_backend(url){
     try{
         const response=await fetch('/remove-bg/url-send/',{
@@ -200,6 +204,7 @@ async function send_url_to_backend(url){
     }
 }
 
+// <=============================================================send image to backend=========================================================>
 imageInput.addEventListener('change',
     async function upload(){
     try{
@@ -271,6 +276,7 @@ imageInput.addEventListener('change',
     
 }
 )
+// <=================================================processed image event listener===============================================>
 processed_image.addEventListener('click',
     ()=>{
         console.log('clicked');
@@ -283,6 +289,7 @@ processed_image.addEventListener('click',
         
     }
 )
+// <===========================================================fetch/get image processed which was sent using url=======================================>
 function getUrlPImage() {
     try{
     const interval=setInterval(async () => {
@@ -321,7 +328,7 @@ function getUrlPImage() {
     }
     
 }
-
+// <======================================================fetch/get processed image which was oploaded using upload button==========================================================>
 function getPImage(){
 const interval= setInterval(async() => {
     try{
