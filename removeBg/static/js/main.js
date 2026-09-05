@@ -303,6 +303,7 @@ function getUrlPImage() {
         preview_img.src='';
         preview.style.display='none';
         form_data.style.display='flex'; 
+        clearInterval(interval);
         
     }
     if(response.status === 400){
@@ -319,12 +320,14 @@ function getUrlPImage() {
     image_div.innerHTML=`<img src='${data.image_url}' id=preview-img>`;
     processed_image_wrapper.style.filter='blur(0px)';
     console.log('done');
+    clearInterval(interval);
     }
         
     }, 1000);
     
     }catch(error){
         console.log(error);
+        clearInterval(interval);
     }
     
 }
@@ -363,12 +366,13 @@ if(response.status === 200){
     processed_image_wrapper.style.filter='blur(0px)';
     console.log('done');
     console.log('failed2');
-    clearInterval(interval)
+    clearInterval(interval);
 }
 
 
 }catch(error){
     console.log(error);
+    clearInterval(interval);
 }
         
     },1000);
