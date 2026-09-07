@@ -16,6 +16,8 @@ image_div=document.getElementById('img-div');
 orignal_image_container=document.getElementById('orignal-image-container');
 processed_image_wrapper=document.getElementById('processed-image-wrapper');
 image_error=document.getElementById('image-error');
+drag_area=document.getElementById('dragarea');
+body=document.body;
 
 
 orignal_img.addEventListener('click',()=>{
@@ -380,8 +382,27 @@ if(response.status === 200){
 }
 
 
+// <=======================================drag code================================================>
+drag_area.addEventListener('dragover',(e)=>{
+    e.preventDefault();
+    form_data.style.display='none';
+    console.log('dragging');
+});
 
+drag_area.addEventListener('dragleave',()=>{
+    form_data.style.display='flex';
+})
 
+// window.addEventListener('dragover',(e)=>{
+//     e.preventDefault();
+//     e.stopPropagation();
+//     print('body');
+// })
 
+// window.addEventListener('drop',(e)=>{
+//     e.preventDefault();
+//     e.stopPropagation();
+//     print('body');
+// })
 
 
