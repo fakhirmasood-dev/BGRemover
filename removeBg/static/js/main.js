@@ -393,16 +393,13 @@ drag_area.addEventListener('dragleave',()=>{
     form_data.style.display='flex';
 })
 
-// window.addEventListener('dragover',(e)=>{
-//     e.preventDefault();
-//     e.stopPropagation();
-//     print('body');
-// })
-
-// window.addEventListener('drop',(e)=>{
-//     e.preventDefault();
-//     e.stopPropagation();
-//     print('body');
-// })
+drag_area.addEventListener('drop',(e)=>{
+    e.preventDefault();
+    const image=e.dataTransfer.files[0];
+    if(!image || image.type.startsWith('image/')){
+        return;
+    }
+    console.log('image received');
+})
 
 
