@@ -395,8 +395,12 @@ drag_area.addEventListener('dragleave',()=>{
 
 drag_area.addEventListener('drop',(e)=>{
     e.preventDefault();
+    e.stopPropagation();
     const image=e.dataTransfer.files[0];
-    if(!image || image.type.startsWith('image/')){
+    console.log('here')
+    console.log(image);
+    console.log(image.type)
+    if(!image || !image.type.startsWith('image/')){
         return;
     }
     console.log('image received');
