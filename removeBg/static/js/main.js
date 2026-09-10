@@ -403,7 +403,25 @@ drag_area.addEventListener('drop',(e)=>{
     if(!image || !image.type.startsWith('image/')){
         return;
     }
-    console.log('image received');
+    ring_wrapper.style.display='flex';
+    image_error.style.display='none';
+    form_data.style.display='none';
+    preview_btns.style.display='none';
+    download_btn.style.display='none';
+    preview_img.src=URL.createObjectURL(image);
+    orignal_img.src=URL.createObjectURL(image);
+    processed_image.src=URL.createObjectURL(image);
+    file_url=URL.createObjectURL(image)
+    preview.style.display='block';
+    stars.style.display='block';
+    processed_image_wrapper.style.filter='blur(10px)';
+    image_div.innerHTML=processed_image_container.innerHTML;
+    console.log('html changed');
+    form_data.style.display='none';
+    both_images.style.display='flex';
+    console.log(preview_img.value);
+    ring_wrapper.style.display='none';
+    
 })
 
 
