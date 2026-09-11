@@ -393,34 +393,107 @@ drag_area.addEventListener('dragleave',()=>{
     form_data.style.display='flex';
 })
 
-drag_area.addEventListener('drop',(e)=>{
-    e.preventDefault();
-    e.stopPropagation();
-    const image=e.dataTransfer.files[0];
-    console.log('here')
-    console.log(image);
-    console.log(image.type)
-    if(!image || !image.type.startsWith('image/')){
-        return;
+async function send_dragged_image_to_backend(image) {
+    try{
+        formdata=new FormData()
+        formdata.append('file',image)
+        const response=await fetch('/remove-bg/home/',
+            {
+                'method':'POST',
+                'headers':{
+                    'X-CSRFToken':getCsrfToken()
+                          },
+                body:formdata
+            
+            }
+        )
+        const data=await response.json()
+        if(response.status === 400){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+        if(response.status === 415){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+        if(response.status === 413){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+
+        if(response.status === 500){
+            image_error.textContent=data.message;
+            image_error.style.display='inline-block';
+            preview_btns.style.display='none';
+            both_images.style.display='none';
+            preview_img.src='';
+            preview.style.display='none';
+            form_data.style.display='flex';
+            
+        }
+        if (response.status === 200){
+            console.log(response.status);
+            getPImage();
+            }
+    }catch(error){
+        console.log(error);
     }
-    ring_wrapper.style.display='flex';
-    image_error.style.display='none';
-    form_data.style.display='none';
-    preview_btns.style.display='none';
-    download_btn.style.display='none';
-    preview_img.src=URL.createObjectURL(image);
-    orignal_img.src=URL.createObjectURL(image);
-    processed_image.src=URL.createObjectURL(image);
-    file_url=URL.createObjectURL(image)
-    preview.style.display='block';
-    stars.style.display='block';
-    processed_image_wrapper.style.filter='blur(10px)';
-    image_div.innerHTML=processed_image_container.innerHTML;
-    console.log('html changed');
-    form_data.style.display='none';
-    both_images.style.display='flex';
-    console.log(preview_img.value);
-    ring_wrapper.style.display='none';
+}
+
+drag_area.addEventListener('drop',(e)=>{
+    try{
+        e.preventDefault();
+        e.stopPropagation();
+        const image=e.dataTransfer.files[0];
+        console.log('here');
+        console.log(image);
+        console.log(image.type)
+        if(!image || !image.type.startsWith('image/')){
+            return;
+        }
+        ring_wrapper.style.display='flex';
+        image_error.style.display='none';
+        form_data.style.display='none';
+        preview_btns.style.display='none';
+        download_btn.style.display='none';
+        preview_img.src=URL.createObjectURL(image);
+        orignal_img.src=URL.createObjectURL(image);
+        processed_image.src=URL.createObjectURL(image);
+        file_url=URL.createObjectURL(image)
+        preview.style.display='block';
+        stars.style.display='block';
+        processed_image_wrapper.style.filter='blur(10px)';
+        image_div.innerHTML=processed_image_container.innerHTML;
+        console.log('html changed');
+        form_data.style.display='none';
+        both_images.style.display='flex';
+        console.log(preview_img.value);
+        ring_wrapper.style.display='none';
+        send_dragged_image_to_backend(image);
+    }catch(error){
+        ring_wrapper.style.display='none';
+        form_data.style.display='flex';
+        console.log(error.message);
+        alert('Some error occured try again.')
+    }
     
 })
 
