@@ -386,11 +386,13 @@ if(response.status === 200){
 drag_area.addEventListener('dragover',(e)=>{
     e.preventDefault();
     form_data.style.display='none';
+    drag_area.classList.add('dragging');
     console.log('dragging');
 });
 
 drag_area.addEventListener('dragleave',()=>{
     form_data.style.display='flex';
+    drag_area.classList.remove('dragging')
 })
 
 async function send_dragged_image_to_backend(image) {
@@ -462,6 +464,7 @@ drag_area.addEventListener('drop',(e)=>{
     try{
         e.preventDefault();
         e.stopPropagation();
+        drag_area.classList.remove('dragging');
         const image=e.dataTransfer.files[0];
         console.log('here');
         console.log(image);

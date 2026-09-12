@@ -200,6 +200,9 @@ nav{
     filter:drop-shadow(1px 1px 5px black);
     border-radius: 20px;
 }
+.pic-input form.dragging{
+    border-color: blue;
+}
 
 
 #select-image{
