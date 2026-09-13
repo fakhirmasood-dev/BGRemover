@@ -17,6 +17,7 @@ orignal_image_container=document.getElementById('orignal-image-container');
 processed_image_wrapper=document.getElementById('processed-image-wrapper');
 image_error=document.getElementById('image-error');
 drag_area=document.getElementById('dragarea');
+drop_sign=document.getElementById('drop-sign');
 body=document.body;
 
 
@@ -388,11 +389,14 @@ drag_area.addEventListener('dragover',(e)=>{
     form_data.style.display='none';
     drag_area.classList.add('dragging');
     console.log('dragging');
+    drop_sign.style.visibility='visible';
+    
 });
 
 drag_area.addEventListener('dragleave',()=>{
     form_data.style.display='flex';
-    drag_area.classList.remove('dragging')
+    drag_area.classList.remove('dragging');
+    drop_sign.style.visibility='visible';
 })
 
 async function send_dragged_image_to_backend(image) {
@@ -464,6 +468,8 @@ drag_area.addEventListener('drop',(e)=>{
     try{
         e.preventDefault();
         e.stopPropagation();
+        drag_area.classList.remove('dragging');
+        drop_sign.style.visibility='hidden';
         drag_area.classList.remove('dragging');
         const image=e.dataTransfer.files[0];
         console.log('here');

@@ -47,6 +47,7 @@
 <!-- <================================================image upload======================================================================== -->
         <div class="pic-input" id="pic-input">
             <h1>Let's Remove <span id="form-heading">Background</span>.</h1>
+            <span id="drop-sign">Drop The Image.</span>
             <form method="post" enctype="multipart/form-data" id="dragarea">
                 <div class="form-data" id="form-data">
                 {% csrf_token %}
@@ -67,6 +68,7 @@
                 <div class="ring-wrapper" id="ring-wrapper">
                     <div class="ring"></div>
                     </div>
+            
             </form>
             <span id="image-error">It is for error which occure during processing.</span>
               <div class="both-images" id="both-images">

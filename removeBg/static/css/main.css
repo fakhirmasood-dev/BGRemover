@@ -182,26 +182,40 @@ nav{
     text-align: center;
     width:200px;
     animation: fade-1 2s infinite alternate;
+    
 
 }
 
+.pic-input h1{
+    text-align: center;
+}
+
+#drop-sign{
+    color:green;
+    font-size: 20px;
+    visibility:hidden;
+}
 
 
 .pic-input form{
-    
+    position: relative;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     width:35%;
     height: 300px;
-    border: solid 2px white;
     background: white;
     filter:drop-shadow(1px 1px 5px black);
     border-radius: 20px;
+    border: 2px solid white;
+     /* isolation: isolate; keep the before behind only the form */
+     transition:all 0.8s ease;
 }
+
 .pic-input form.dragging{
     border-color: blue;
+    transform: scale(1.02);
 }
 
 
