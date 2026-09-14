@@ -463,7 +463,7 @@ async function send_dragged_image_to_backend(image) {
         console.log(error);
     }
 }
-
+//drop code for dropping image.
 drag_area.addEventListener('drop',(e)=>{
     try{
         e.preventDefault();
