@@ -3,6 +3,9 @@
 <p>BGRemover is a full-stack web app built with django.It take images as input and return the processed the image with removed background.It also take images as URL input.
 It has security features such as image validation,image size limitation and image dimension limitation.</p>
 
+<img src='screenshots/screenshot.png' width='200px' height='200px'>
+<img src='screenshots/screenshot1.png' width='200px' height='200px'>
+
  <h2>Key Features</h2>
 <ul>
     <li>Image Input</li>
